@@ -1,0 +1,13 @@
+from typing import List
+
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        answer = [0] * len(temperatures)
+        stack = []
+        for i, cur in enumerate(temperatures):
+            # 현재 온도가 스택 값보다 높다면 정답 처리
+            while stack and cur > temperatures[stack[-1]]:
+                top = stack.pop()
+                answer[top] = i - top
+            stack.append(i)
+        return answer
