@@ -27,25 +27,27 @@ def sol(n):
 
 
 for _ in range(T):
-    m = int(input())
-    print(sol(m))
+    n = int(input())
+    print(sol(n))
 
 
-def backTracking(sum, n):
-    global case
+def bt(value, sum):
+    global cnt
+
+    if sum >= n:
+        return
+
+    sum += value
     if sum == n:
-        case += 1
-        return
-    elif sum > n:
-        return
-    else:
-        for i in range(1, 4):
-            backTracking(sum+i, n)
+        cnt += 1
+    bt(1, sum)
+    bt(2, sum)
+    bt(3, sum)
 
 
 T = int(input())
 for _ in range(T):
-    case = 0
-    m = int(input())
-    backTracking(0, m)
-    print(case)
+    n = int(input())
+    cnt = 0
+    bt(0, 0)
+    print(cnt)
