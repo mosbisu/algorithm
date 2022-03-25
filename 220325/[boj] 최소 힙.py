@@ -39,7 +39,7 @@ class BinaryMinHeap:
 
     def extract(self):
         if len(self) < 1:
-            return 0
+            return None
 
         root = self.items[1]
         self.items[1] = self.items[-1]
@@ -56,34 +56,32 @@ result = []
 heap = BinaryMinHeap()
 
 for x in arr:
-    if x == 0:                             # 입력값이 0일 때
-        if len(heap) == 0:                 # 빈 배열이면 0 추가
+    if x == 0:                                # 입력값이 0일 때
+        if not heap:                          # 빈 배열이면 result에 0 추가
             result.append(0)
-            continue
-        else:                              # 빈 배열이 아니면 최솟값 추가
+        else:                                 # 빈 배열이 아니면 result에 최솟값 추가
             result.append(heap.extract())
-            continue
-
-    heap.insert(x)
+    else:
+        heap.insert(x)                        # 0이 아니면 힙에 추가
 
 for i in result:
     print(i)
 
 # heapq를 이용한 풀이
 N = int(input())
-X = []
+arr = []
 result = []
 
 for _ in range(N):
     x = int(input())
 
-    if x == 0:                             # 입력값이 0일 때
-        if len(X) == 0:                    # 빈 배열이면 0 추가
+    if x == 0:                                # 입력값이 0일 때
+        if not arr:                           # 빈 배열이면 result에 0 추가
             result.append(0)
-        else:                              # 빈 배열이 아니면 최솟값 추가
-            result.append(heapq.heappop(X))
+        else:                                 # 빈 배열이 아니면 result에 최솟값 추가
+            result.append(heapq.heappop(arr))
     else:
-        heapq.heappush(X, x)
+        heapq.heappush(arr, x)                # 0이 아니면 힙에 추가
 
 for i in result:
     print(i)
