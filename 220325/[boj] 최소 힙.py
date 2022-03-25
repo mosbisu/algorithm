@@ -20,12 +20,14 @@ class BinaryMinHeap:
 
             cur, parent = parent, cur // 2
 
-    def insert(self, val: int):
-        self.items.append(val)
+    def insert(self, k):
+        self.items.append(k)
         self._percolate_up()
 
     def _percolate_down(self, cur):
-        smallest, left, right = cur, cur*2, cur*2+1
+        smallest = cur
+        left = cur * 2
+        right = cur * 2 + 1
 
         if left <= len(self) and self.items[left] < self.items[smallest]:
             smallest = left
@@ -51,37 +53,38 @@ class BinaryMinHeap:
 
 # 힙을 직접 구현해서 풀기
 N = int(input())
-arr = [int(input()) for _ in range(N)]
 result = []
 heap = BinaryMinHeap()
 
-for x in arr:
-    if x == 0:                                # 입력값이 0일 때
-        if not heap:                          # 빈 배열이면 result에 0 추가
+for _ in range(N):
+    x = int(input())
+
+    if x == 0:                                 # 입력값이 0일 때
+        if not heap:                           # 빈 배열이면 result에 0 추가
             result.append(0)
-        else:                                 # 빈 배열이 아니면 result에 최솟값 추가
+        else:                                  # 빈 배열이 아니면 result에 최솟값 추가
             result.append(heap.extract())
     else:
-        heap.insert(x)                        # 0이 아니면 힙에 추가
+        heap.insert(x)                         # 0이 아니면 힙에 추가
 
 for i in result:
     print(i)
 
 # heapq를 이용한 풀이
 N = int(input())
-arr = []
+heap = []
 result = []
 
 for _ in range(N):
     x = int(input())
 
-    if x == 0:                                # 입력값이 0일 때
-        if not arr:                           # 빈 배열이면 result에 0 추가
+    if x == 0:                                 # 입력값이 0일 때
+        if not heap:                           # 빈 배열이면 result에 0 추가
             result.append(0)
-        else:                                 # 빈 배열이 아니면 result에 최솟값 추가
-            result.append(heapq.heappop(arr))
+        else:                                  # 빈 배열이 아니면 result에 최솟값 추가
+            result.append(heapq.heappop(heap))
     else:
-        heapq.heappush(arr, x)                # 0이 아니면 힙에 추가
+        heapq.heappush(heap, x)                # 0이 아니면 힙에 추가
 
 for i in result:
     print(i)
