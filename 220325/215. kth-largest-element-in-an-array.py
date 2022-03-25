@@ -1,4 +1,5 @@
 from typing import List
+import heapq
 
 
 class BinaryMaxHeap:
@@ -55,9 +56,12 @@ class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         heap = BinaryMaxHeap()
         for num in nums:
-            heap.insert(num)
+            heapq.heappush(heap, -num)
 
-        return heap.extract(k)
+        for _ in range(1, k):
+            heapq.heappop(heap)
+
+        return -heapq.heappop(heap)
 
 
 class Solution2:
