@@ -1,5 +1,4 @@
 from typing import Optional
-from xml.sax.handler import DTDHandler
 
 
 class ListNode:
